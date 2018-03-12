@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mpg123": "^0.2.3"
+    "mpg123": "^0.2.3",
+    "request": "^2.85.0"
   }
 }
