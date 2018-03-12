@@ -12,9 +12,13 @@ const stream = request(`https://ai.baidu.com/aidemo?type=tns2&idx=1&tex=${decode
 
 console.log(msg);
 
+
+
 stream.on('finish', () => {
     console.log('play')
-    player.play(`${__dirname}/test.mp3`)
+      var mp3Url = "http://tts.baidu.com/text2audio?idx=1&tex=" + encodeURIComponent(msg) + "&cuid=baidu_speech_demo&cod=2&lan=zh&ctp=1&pdt=1&spd=5&per=0&vol=5&pit=5"
+  
+    player.play(mp3Url)
 });
 
 stream.on('error', err => {
