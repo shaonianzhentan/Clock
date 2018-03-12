@@ -5,7 +5,7 @@ let fs = require('fs')
 
 var player = new mpg.MpgPlayer()
 
-let msg = '现在是23:22'
+let msg = '这里有一句话，我不知道当讲不当讲'
 
 const stream = request(`https://ai.baidu.com/aidemo?type=tns2&idx=1&tex=${decodeURIComponent(msg)}&cuid=baidu_speech_demo&cod=2&lan=zh&ctp=1&pdt=1&spd=5&per=4&vol=9&pit=5`)
     .pipe(fs.createWriteStream('test.mp3'))
