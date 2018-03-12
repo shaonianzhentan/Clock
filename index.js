@@ -5,18 +5,12 @@ let fs = require('fs')
 
 var player = new mpg.MpgPlayer()
 
-let msg = 'abcdefghijklmnopqrst'
-
-const stream = request(`https://ai.baidu.com/aidemo?type=tns2&idx=1&tex=${decodeURIComponent(msg)}&cuid=baidu_speech_demo&cod=2&lan=zh&ctp=1&pdt=1&spd=5&per=4&vol=9&pit=5`)
-    .pipe(fs.createWriteStream('test.mp3'))
-
-console.log(msg);
-
+let msg = '现在时间是23:50'
 
 
 stream.on('finish', () => {
     console.log('play')
-      var mp3Url = "http://tts.baidu.com/text2audio?idx=1&tex=" + encodeURIComponent(msg) + "&cuid=baidu_speech_demo&cod=2&lan=zh&ctp=1&pdt=1&spd=5&per=0&vol=5&pit=5"
+      var mp3Url = "http://tts.baidu.com/text2audio?idx=1&tex=" + encodeURIComponent(msg) + "&cuid=baidu_speech_demo&cod=2&lan=zh&ctp=1&pdt=1&spd=5&per=4&vol=5&pit=5"
   
     player.play(mp3Url)
 });
