@@ -7,6 +7,14 @@ class Clock {
 		fetch('http://jiluxinqing.com:3000/clock.json').then(res => {
 			res.json().then(arr => {
 				this.list = arr
+				this.list.push({
+					"h" : 18,
+					"i" : 42,
+					"s" : 0,
+					"w" : 1,
+					"mp3": "2044986054",			
+					"type" : 1
+				})
 			})
 		})
 	}
@@ -30,10 +38,16 @@ class Clock {
 				//判断是否当天
 				if (t.w == e.w && e.type == 1) {
 					//闹钟响了，播放音乐
+					music.playlist(e.mp3).then(()=>{
+						music.load()
+					}).catch(err=>{
+						console.log(err)
+					})
 					break
 				} else if (e.type == 0) {
 					if (e.mp3) {
-						//播放链接								
+						//播放链接		
+						music.play(e.mp3)						
 					} else {
 						//报时								
 						this.baoshi('亲爱的，现在时间是' + (new Date()).toLocaleString())
