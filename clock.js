@@ -8,8 +8,8 @@ class Clock {
 			res.json().then(arr => {
 				this.list = arr
 				this.list.push({
-					"h": 19,
-					"i": 57,
+					"h": 20,
+					"i": 10,
 					"s": 0,
 					"w": 3,
 					"mp3": "2140332378",
@@ -40,7 +40,7 @@ class Clock {
 					console.log('闹钟响了，播放音乐')
 					//闹钟响了，播放音乐
 					music.playlist(e.mp3).then(() => {
-						music.load()
+						music.random()
 					}).catch(err => {
 						console.log(err)
 					})
