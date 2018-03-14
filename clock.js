@@ -62,6 +62,7 @@ class Clock {
 	}
 
 	baoshi(msg) {
+		music.musicList = []
 		music.play(`http://tts.baidu.com/text2audio?idx=1&tex=${encodeURIComponent(msg)}&cuid=baidu_speech_demo&cod=2&lan=zh&ctp=1&pdt=1&spd=5&per=4&vol=5&pit=5`)
 	}
 }

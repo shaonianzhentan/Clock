@@ -5,6 +5,7 @@ class Music {
 	constructor() {
 		this.api_url = `http://jiluxinqing.com:3000/`
 		this.isLoading = false
+		this.playing = false
 		this._musicList = []
 		//音乐列表索引
 		this.musicIndex = 0
