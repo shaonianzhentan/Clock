@@ -8,8 +8,8 @@ class Clock {
 			res.json().then(arr => {
 				this.list = arr
 				this.list.push({
-					"h": 19,
-					"i": 46,
+					"h": 20,
+					"i": 00,
 					"s": 0,
 					"w": 3,
 					"mp3": "2140332378",
