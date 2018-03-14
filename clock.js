@@ -9,7 +9,7 @@ class Clock {
 				this.list = arr
 				this.list.push({
 					"h": 20,
-					"i": 10,
+					"i": 30,
 					"s": 0,
 					"w": 3,
 					"mp3": "2140332378",
