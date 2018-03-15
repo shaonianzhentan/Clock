@@ -4,6 +4,7 @@ const music = require('./music')()
 class Clock {
 	constructor() {
 		this.list = []
+		this.music = music
 		fetch('http://jiluxinqing.com:3000/clock.json').then(res => {
 			res.json().then(arr => {
 				this.list = arr
