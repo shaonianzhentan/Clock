@@ -22,7 +22,7 @@ function readInput(err) {
 		if (value) {
 			clock.baoshi('亲爱的，现在时间是' + (new Date()).toLocaleString())
 			seconds = 30000
-			console.log('有人');
+			console.log((new Date()).toLocaleString(), '有人')
 		}
 		setTimeout(() => {
 			readInput()
