@@ -26,7 +26,6 @@ function readInput(err) {
 		}
 		setTimeout(() => {
 			readInput()
-		}, 1000 * 10)
-		//console.log('The value is ' + value);
+		}, seconds)
 	});
 }
