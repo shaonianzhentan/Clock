@@ -5,12 +5,17 @@ class Clock {
 	constructor() {
 		this.list = []
 		this.music = music
+		this.getData()
+	}
+
+	getData() {
 		fetch('http://api3.jiluxinqing.com/data/clock.json').then(res => {
 			res.json().then(arr => {
 				this.list = arr
 			})
 		})
 	}
+
 	//滴答滴答滴答
 	tick() {
 		let today = new Date()
@@ -39,6 +44,7 @@ class Clock {
 					})
 					break
 				} else if (e.type == 0) {
+					this.getData()
 					if (e.mp3) {
 						console.log('自定义报时')
 						//播放链接		
