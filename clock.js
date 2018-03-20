@@ -5,17 +5,9 @@ class Clock {
 	constructor() {
 		this.list = []
 		this.music = music
-		fetch('http://jiluxinqing.com:3000/clock.json').then(res => {
+		fetch('http://api3.jiluxinqing.com/data/clock.json').then(res => {
 			res.json().then(arr => {
 				this.list = arr
-				this.list.push({
-					"h": 20,
-					"i": 30,
-					"s": 0,
-					"w": 3,
-					"mp3": "2140332378",
-					"type": 1
-				})
 			})
 		})
 	}
@@ -53,8 +45,11 @@ class Clock {
 						music.play(e.mp3)
 					} else {
 						console.log('报时')
-						//报时								
-						this.baoshi('亲爱的，现在时间是' + (new Date()).toLocaleString())
+						//报时		
+						if (t.h < 10) t.h = '0' + t.h
+						if (t.i < 10) t.i = '0' + t.i
+
+						this.baoshi(`亲爱的，现在时间是${t.h}:${t.i}`)
 					}
 					break
 				}
