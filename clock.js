@@ -29,6 +29,8 @@ class Clock {
 			, w: today.getDay()
 		}
 
+		if (today.i == 0 && today.s == 0) this.getData()
+
 		for (let e of this.list) {
 			let t = this.today
 			//判断时间是否一致
@@ -44,7 +46,6 @@ class Clock {
 					})
 					break
 				} else if (e.type == 0) {
-					this.getData()
 					if (e.mp3) {
 						console.log('自定义报时')
 						//播放链接		
