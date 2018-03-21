@@ -1,11 +1,12 @@
 let clock = require('./clock')()
+const moment = require('moment')
 
 
 setInterval(() => {
 	clock.tick()
 }, 1000)
 
-clock.baoshi('亲爱的，现在时间是' + (new Date()).toLocaleString())
+clock.baoshi(`亲爱的，现在时间是${moment().format('LLLL')}`)
 
 //红外感应开关
 var gpio = require("rpi-gpio")
@@ -35,7 +36,7 @@ gpio.setup(PIN, gpio.DIR_IN, err => {
 				if (obj.a > 0) {
 					console.log('success', obj.a)
 					if(obj.a > 10 && clock.music.musicList.length > 0){
-						clock.baoshi('亲爱的，现在时间是' + (new Date()).toLocaleString())
+						clock.baoshi(`亲爱的，现在时间是${moment().format('LLLL')}`)
 						console.log((new Date()).toLocaleString(), '有人')
 					}
 					obj.a = 0

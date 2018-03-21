@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 const music = require('./music')()
-const moment = require('moment');
+const moment = require('moment')
 
 class Clock {
 	constructor() {
