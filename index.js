@@ -1,6 +1,6 @@
 let clock = require('./clock')()
 const moment = require('moment')
-
+moment.locale('zh-cn')
 
 setInterval(() => {
 	clock.tick()

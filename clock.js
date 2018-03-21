@@ -1,6 +1,7 @@
 const fetch = require('node-fetch')
 const music = require('./music')()
 const moment = require('moment')
+moment.locale('zh-cn')
 
 class Clock {
 	constructor() {
