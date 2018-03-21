@@ -1,5 +1,6 @@
 const fetch = require('node-fetch')
 const music = require('./music')()
+const moment = require('moment');
 
 class Clock {
 	constructor() {
@@ -29,7 +30,6 @@ class Clock {
 			, w: today.getDay()
 		}
 
-		if (today.i == 0 && today.s == 0) this.getData()
 
 		for (let e of this.list) {
 			let t = this.today
@@ -52,16 +52,15 @@ class Clock {
 						music.play(e.mp3)
 					} else {
 						console.log('报时')
-						//报时		
-						if (t.h < 10) t.h = '0' + t.h
-						if (t.i < 10) t.i = '0' + t.i
-
-						this.baoshi(`亲爱的，现在时间是${t.h}:${t.i}`)
+						let nowTime = moment().format('LLLL')
+						this.baoshi(`亲爱的，现在时间是${nowTime}`)
 					}
 					break
 				}
 			}
 		}
+
+		if (today.i == 0 && today.s == 0) this.getData()
 	}
 
 	baoshi(msg) {
