@@ -8,6 +8,7 @@ class Clock {
 		this.list = []
 		this.music = music
 		this.getData()
+		this.play('http://api3.jiluxinqing.com/clock/2200.mp3')
 	}
 
 	getData() {
@@ -50,7 +51,7 @@ class Clock {
 					if (e.mp3) {
 						console.log('自定义报时')
 						//播放链接		
-						music.play(e.mp3)
+						this.play(e.mp3)
 					} else {
 						console.log('报时')
 						let nowTime = moment(today).format('LLLL')
@@ -67,6 +68,11 @@ class Clock {
 	baoshi(msg) {
 		music.musicList = []
 		music.play(`http://tts.baidu.com/text2audio?idx=1&tex=${encodeURIComponent(msg)}&cuid=baidu_speech_demo&cod=2&lan=zh&ctp=1&pdt=1&spd=5&per=4&vol=5&pit=5`)
+	}
+
+	play (mp3){
+		music.musicList = []
+		music.play(mp3)	
 	}
 }
 
