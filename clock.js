@@ -11,7 +11,7 @@ class Clock {
 	}
 
 	getData() {
-		fetch('http://api3.jiluxinqing.com/data/clock.json').then(res => {
+		fetch(`http://api3.jiluxinqing.com/data/clock.json?v=${new Date()}`).then(res => {
 			res.json().then(arr => {
 				this.list = arr
 			})
@@ -53,7 +53,7 @@ class Clock {
 						music.play(e.mp3)
 					} else {
 						console.log('报时')
-						let nowTime = moment().format('LLLL')
+						let nowTime = moment(today).format('LLLL')
 						this.baoshi(`亲爱的，现在时间是${nowTime}`)
 					}
 					break
