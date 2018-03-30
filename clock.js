@@ -8,13 +8,16 @@ class Clock {
 		this.list = []
 		this.music = music
 		this.getData()
-
-				music.playlist('2160550186').then(() => {
-					music.random()
-				}).catch(err => {
-					console.log(err)
-				})
-
+		/*
+						music.playlist('2160550186').then(() => {
+							music.random()
+						}).catch(err => {
+							console.log(err)
+						})
+		*/
+		let nowTime = moment(new Date()).format('LLLL')
+		this.baoshi(`亲爱的，现在时间是${nowTime}`)
+		console.log('闹钟启动成功')
 	}
 
 	getData() {

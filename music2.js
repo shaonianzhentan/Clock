@@ -76,18 +76,25 @@ class Music {
 
         let ps = spawn('mplayer', [url])
         ps.stdout.on('data', (data) => {
-            console.log(`ps stdout: ${data}`);
+            //console.log(`ps stdout: ${data}`);
         });
 
         ps.stderr.on('data', (data) => {
-            console.log(`ps stderr: ${data}`);
+            //console.log(`ps stderr: ${data}`);
+            console.log('出现错误')
         });
 
         ps.on('close', (code) => {
             console.log(`子进程退出码：${code}`);
-            console.log('play end')
-            this.next();
+            if (code == 0) {
+                console.log('play end')
+                this.next();
+            }
         });
+
+        ps.on('error', (code) => {
+            console.log('启动子进程失败。');
+        })
 
         this.setStatus('正在播放');
         console.log('playing');
