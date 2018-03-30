@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const Mplayer = require('node-mplayer')
+const Mplayer = require('./mplayer')
 
 class Music {
     constructor() {
@@ -9,6 +9,7 @@ class Music {
         this._musicList = []
         //音乐列表索引
         this.musicIndex = 0
+        this.timeout = 0
     }
 
     //音乐列表
@@ -76,9 +77,14 @@ class Music {
         this.player = new Mplayer(url)
         this.player.on('end', (data) => {
             console.log('play end')
+            this.timeout = 0                                    
             this.next()
         })
         this.player.on('error', (data) => {
+            this.timeout += 1
+            if (this.timeout < 3) {
+                this.play(url)
+            }
             console.log('播放器出错：' + data)
         })
 
