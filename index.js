@@ -2,11 +2,21 @@ let clock = require('./clock')()
 const moment = require('moment')
 moment.locale('zh-cn')
 
+const process = require('process')
+
+process.on('uncaughtException', function (err) {
+	//打印出错误
+	//console.log(err);
+	//打印出错误的调用栈方便调试
+	//console.log(err.stack);
+});
+
+
 setInterval(() => {
 	clock.tick()
 }, 1000)
 
-clock.baoshi(`亲爱的，现在时间是${moment().format('LLLL')}`)
+//clock.baoshi(`亲爱的，现在时间是${moment().format('LLLL')}`)
 
 //红外感应开关
 var gpio = require("rpi-gpio")
@@ -35,7 +45,7 @@ gpio.setup(PIN, gpio.DIR_IN, err => {
 			} else {
 				if (obj.a > 0) {
 					console.log('success', obj.a)
-					if(obj.a > 10 && clock.music.musicList.length > 0){
+					if (obj.a > 10 && clock.music.musicList.length > 0) {
 						clock.baoshi(`亲爱的，现在时间是${moment().format('LLLL')}`)
 						console.log((new Date()).toLocaleString(), '有人')
 					}
@@ -47,3 +57,5 @@ gpio.setup(PIN, gpio.DIR_IN, err => {
 		})
 	}, 1000)
 })
+
+

@@ -11,10 +11,10 @@ class Clock {
 		this.play('http://api3.jiluxinqing.com/clock/2200.mp3')
 	}
 
-	getData() {
-		fetch(`http://api3.jiluxinqing.com/data/clock.json?v=${new Date()}`).then(res => {
-			res.json().then(arr => {
-				this.list = arr
+	getData() {		
+		fetch(`http://api3.jiluxinqing.com/data/clock.json?v=${Date.now()}`).then(res => {
+			res.text().then(body=>{
+				this.list = JSON.parse(body)
 			})
 		})
 	}
