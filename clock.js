@@ -8,12 +8,18 @@ class Clock {
 		this.list = []
 		this.music = music
 		this.getData()
-		this.play('http://api3.jiluxinqing.com/clock/2200.mp3')
+
+				music.playlist('2160550186').then(() => {
+					music.random()
+				}).catch(err => {
+					console.log(err)
+				})
+
 	}
 
-	getData() {		
+	getData() {
 		fetch(`http://api3.jiluxinqing.com/data/clock.json?v=${Date.now()}`).then(res => {
-			res.text().then(body=>{
+			res.text().then(body => {
 				this.list = JSON.parse(body)
 			})
 		})
@@ -70,9 +76,9 @@ class Clock {
 		music.play(`http://tts.baidu.com/text2audio?idx=1&tex=${encodeURIComponent(msg)}&cuid=baidu_speech_demo&cod=2&lan=zh&ctp=1&pdt=1&spd=5&per=4&vol=5&pit=5`)
 	}
 
-	play (mp3){
+	play(mp3) {
 		music.musicList = []
-		music.play(mp3)	
+		music.play(mp3)
 	}
 }
 

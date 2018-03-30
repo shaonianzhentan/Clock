@@ -9,15 +9,6 @@ class Music {
         this._musicList = []
         //音乐列表索引
         this.musicIndex = 0
-
-        this.player = new Mplayer()
-        this.player.on('end', (data) => {
-            console.log('play end')
-            this.next()
-        })
-        this.player.on('error', (data) => {
-            console.log('播放器出错：' + data)
-        })
     }
 
     //音乐列表
@@ -81,7 +72,16 @@ class Music {
     }
 
     play(url) {
-        this.player.setFile(url);
+
+        this.player = new Mplayer(url)
+        this.player.on('end', (data) => {
+            console.log('play end')
+            this.next()
+        })
+        this.player.on('error', (data) => {
+            console.log('播放器出错：' + data)
+        })
+
         this.player.play();
         this.setStatus('正在播放');
         console.log('playing');

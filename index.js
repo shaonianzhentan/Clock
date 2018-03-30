@@ -16,8 +16,6 @@ setInterval(() => {
 	clock.tick()
 }, 1000)
 
-//clock.baoshi(`亲爱的，现在时间是${moment().format('LLLL')}`)
-
 //红外感应开关
 var gpio = require("rpi-gpio")
 let PIN = 12
