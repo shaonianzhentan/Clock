@@ -80,8 +80,7 @@ class Music {
         });
 
         ps.stderr.on('data', (data) => {
-            //console.log(`ps stderr: ${data}`);
-            console.log('出现错误')
+            console.log(`ps stderr: ${data}`);
         });
 
         ps.on('close', (code) => {
