@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-var cp = require('child_process')
+const { spawn } = require('child_process');
 
 class Music {
     constructor() {
@@ -74,9 +74,9 @@ class Music {
 
     play(url) {
 
-        let ps = cp.spawn('mpg123', url)
+        let ps = spawn('mplayer', [url])
         ps.stdout.on('data', (data) => {
-            console.log(data);
+            console.log(`ps stdout: ${data}`);
         });
 
         ps.stderr.on('data', (data) => {
@@ -84,11 +84,11 @@ class Music {
         });
 
         ps.on('close', (code) => {
-            if (code !== 0) {
-                console.log(`ps 进程退出码：${code}`);
-            }
+            console.log(`子进程退出码：${code}`);
+            console.log('play end')
+            this.next();
         });
-        
+
         this.setStatus('正在播放');
         console.log('playing');
     }
