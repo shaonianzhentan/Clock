@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const Mplayer = require('./mplayer')
+var cp = require('child_process')
 
 class Music {
     constructor() {
@@ -74,27 +74,27 @@ class Music {
 
     play(url) {
 
-        this.player = new Mplayer(url)
-        this.player.on('end', (data) => {
-            console.log('play end')
-            this.timeout = 0                                    
-            this.next()
-        })
-        this.player.on('error', (data) => {
-            this.timeout += 1
-            if (this.timeout < 3) {
-                this.play(url)
-            }
-            console.log('播放器出错：' + data)
-        })
+        let ps = cp.spawn('mpg123', url)
+        ps.stdout.on('data', (data) => {
+            console.log(data);
+        });
 
-        this.player.play();
+        ps.stderr.on('data', (data) => {
+            console.log(`ps stderr: ${data}`);
+        });
+
+        ps.on('close', (code) => {
+            if (code !== 0) {
+                console.log(`ps 进程退出码：${code}`);
+            }
+        });
+        
         this.setStatus('正在播放');
         console.log('playing');
     }
 
     pause() {
-        this.player.pause()
+        //this.player.pause()
 		/*
 		let audio = this.video;
 		if(this.timer) clearInterval(this.timer);
