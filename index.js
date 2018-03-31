@@ -24,6 +24,7 @@ gpio.setup(PIN, gpio.DIR_IN, err => {
 		console.log(err)
 		return
 	}
+	let flags = true
 	setInterval(() => {
 		gpio.read(PIN, function (err, value) {
 			if (err) {
@@ -31,8 +32,13 @@ gpio.setup(PIN, gpio.DIR_IN, err => {
 				return
 			}
 			if (value) {
-				clock.baoshi(`亲爱的，现在时间是${moment().format('LLLL')}`)
+				if (flags) {
+					flags = false
+					clock.baoshi(`亲爱的，现在时间是${moment().format('LLLL')}`)
+				}
 				console.log((new Date()).toLocaleString(), '有人')
+			} else {
+				flags = true
 			}
 		})
 	}, 1000)
