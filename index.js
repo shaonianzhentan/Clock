@@ -34,6 +34,7 @@ gpio.setup(PIN, gpio.DIR_IN, err => {
 			if (value) {
 				if (flags) {
 					flags = false
+					clock.getData()
 					clock.baoshi(`亲爱的，现在时间是${moment().format('LLLL')}`)
 					setTimeout(() => {
 						flags = true
