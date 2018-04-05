@@ -90,6 +90,7 @@ class Music {
 
             ps.on('close', (code) => {
                 console.log(`子进程退出码：${code}`);
+                this.ps = null
                 if (code == 0) {
                     console.log('play end')
                     this.next();
