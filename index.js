@@ -35,10 +35,11 @@ gpio.setup(PIN, gpio.DIR_IN, err => {
 				if (flags) {
 					flags = false
 					clock.baoshi(`亲爱的，现在时间是${moment().format('LLLL')}`)
+					setTimeout(() => {
+						flags = true
+					}, 10000)
 				}
 				console.log((new Date()).toLocaleString(), '有人')
-			} else {
-				flags = true
 			}
 		})
 	}, 1000)
