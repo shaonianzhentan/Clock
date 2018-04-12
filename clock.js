@@ -50,14 +50,19 @@ class Clock {
 				if (t.w == e.w && e.type == 1) {
 					console.log('闹钟响了，播放音乐')
 					//闹钟响了，播放音乐
-					music.playlist(e.mp3).then(() => {
-						music.random()
-					}).catch(err => {
-						console.log(err)
-					})
+					if (e.mp3.indexOf('http') == 0) {
+						//播放链接		
+						this.play(e.mp3)
+					} else {
+						music.playlist(e.mp3).then(() => {
+							music.random()
+						}).catch(err => {
+							console.log(err)
+						})
+					}
 					break
 				} else if (e.type == 0) {
-					if (e.mp3) {
+					if (e.mp3 && e.mp3.indexOf('http') == 0) {
 						console.log('自定义报时')
 						//播放链接		
 						this.play(e.mp3)
