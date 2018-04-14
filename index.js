@@ -2,6 +2,26 @@ let clock = require('./clock')()
 const moment = require('moment')
 moment.locale('zh-cn')
 
+const http = require('http');
+const url = require('url');
+const server = http.createServer((req, res) => {
+	var pathname = url.parse(req.url).pathname;
+	switch (pathname) {
+		case '/baoshi':
+			BaoShi();
+			break;
+	}
+
+	res.statusCode = 200;
+	res.setHeader('Content-Type', 'text/plain');
+	res.end('success');
+});
+
+server.listen(3000, () => {
+	console.log(`Server is running `);
+});
+
+
 const process = require('process')
 
 process.on('uncaughtException', function (err) {
@@ -53,20 +73,3 @@ gpio.setup(PIN, gpio.DIR_IN, err => {
 })
 
 
-const http = require('http');
-const server = http.createServer((req, res) => {
-	var pathname = url.parse(req.url).pathname;
-	switch (pathname) {
-		case '/baoshi':
-			BaoShi();
-			break;
-	}
-
-	res.statusCode = 200;
-	res.setHeader('Content-Type', 'text/plain');
-	res.end('success');
-});
-
-server.listen(3000, () => {
-	console.log(`Server is running `);
-});
