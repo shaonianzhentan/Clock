@@ -16,6 +16,20 @@ setInterval(() => {
 	clock.tick()
 }, 1000)
 
+
+let flags = true
+function BaoShi(){
+	if (flags) {
+		flags = false
+		clock.getData()
+		clock.baoshi(`亲爱的，现在时间是${moment().format('LLLL')}`)
+		setTimeout(() => {
+			flags = true
+		}, 10000)
+	}
+	//console.log((new Date()).toLocaleString(), '有人')
+}
+
 //红外感应开关
 var gpio = require("rpi-gpio")
 let PIN = 12
@@ -24,7 +38,7 @@ gpio.setup(PIN, gpio.DIR_IN, err => {
 		console.log(err)
 		return
 	}
-	let flags = true
+	
 	setInterval(() => {
 		gpio.read(PIN, function (err, value) {
 			if (err) {
@@ -32,18 +46,27 @@ gpio.setup(PIN, gpio.DIR_IN, err => {
 				return
 			}
 			if (value) {
-				if (flags) {
-					flags = false
-					clock.getData()
-					clock.baoshi(`亲爱的，现在时间是${moment().format('LLLL')}`)
-					setTimeout(() => {
-						flags = true
-					}, 10000)
-				}
-				console.log((new Date()).toLocaleString(), '有人')
+				BaoShi()
 			}
 		})
 	}, 1000)
 })
 
 
+const http = require('http');
+const server = http.createServer((req, res) => {
+	var pathname = url.parse(req.url).pathname;
+	switch (pathname) {
+		case '/baoshi':
+			BaoShi();
+			break;
+	}
+
+	res.statusCode = 200;
+	res.setHeader('Content-Type', 'text/plain');
+	res.end('success');
+});
+
+server.listen(3000, () => {
+	console.log(`Server is running `);
+});
