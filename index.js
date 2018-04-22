@@ -49,27 +49,3 @@ function BaoShi(){
 	}
 	//console.log((new Date()).toLocaleString(), '有人')
 }
-
-//红外感应开关
-var gpio = require("rpi-gpio")
-let PIN = 12
-gpio.setup(PIN, gpio.DIR_IN, err => {
-	if (err) {
-		console.log(err)
-		return
-	}
-	
-	setInterval(() => {
-		gpio.read(PIN, function (err, value) {
-			if (err) {
-				console.error(err)
-				return
-			}
-			if (value) {
-				BaoShi()
-			}
-		})
-	}, 1000)
-})
-
-
