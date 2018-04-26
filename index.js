@@ -4,17 +4,28 @@ moment.locale('zh-cn')
 
 const http = require('http');
 const url = require('url');
+const querystring = require('querystring');
 const server = http.createServer((req, res) => {
-	var pathname = url.parse(req.url).pathname;
+	var body = 'success'
+	var obj = url.parse(req.url)
+	var pathname = obj.pathname;
 	switch (pathname) {
 		case '/baoshi':
 			BaoShi();
 			break;
 	}
+	if (obj.query) {
+		let query = querystring.parse(obj.query);
+		//播放音乐链接
+		if (query.mp3 && query.mp3.indexOf('http') == 0) {
+			body = `playing ${query.mp3}`
+			clock.play(query.mp3)
+		}
+	}
 
 	res.statusCode = 200;
 	res.setHeader('Content-Type', 'text/plain');
-	res.end('success');
+	res.end(body);
 });
 
 server.listen(3000, () => {
@@ -38,7 +49,7 @@ setInterval(() => {
 
 
 let flags = true
-function BaoShi(){
+function BaoShi() {
 	if (flags) {
 		flags = false
 		clock.getData()
